@@ -1,0 +1,28 @@
+<div class="h-screen flex items-center justify-center">
+	<div class="bg-linear-to-b from-sky-50 to-sky-200 border border-neutral-500 w-96 p-2 shadow-md">
+		<h1>IRIS</h1>
+		<p>Internal Record & Information Subsystem</p>
+		<p class="text-sm">
+			<em>Version 3.2</em>
+		</p>
+		<form (submit)="submitLoginForm($event)">
+			<label for="username">Username</label>
+			<input type="text" [field]="loginForm.username" id="username" />
+			@if (this.loginForm.username().touched() && !this.loginForm.username().valid()) {
+				@for (error of this.loginForm.username().errors(); track $index) {
+					<p class="error-msg">{{ error.message }}</p>
+				}
+			}
+
+			<label for="password">Password</label>
+			<input type="password" [field]="loginForm.password" id="password" />
+			@if (this.loginForm.password().touched() && !this.loginForm.password().valid()) {
+				@for (error of this.loginForm.password().errors(); track $index) {
+					<p class="error-msg">{{ error.message }}</p>
+				}
+			}
+
+			<button>Log in</button>
+		</form>
+	</div>
+</div>

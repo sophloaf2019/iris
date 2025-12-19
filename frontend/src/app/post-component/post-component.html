@@ -1,0 +1,48 @@
+<div
+	class="bg-linear-to-b from-neutral-50 to-neutral-200 border border-neutral-500 p-2 shadow-md mx-auto"
+>
+	<h2>{{ post.title }}</h2>
+
+	<div class="space-x-2 mb-2">
+		@if (canEdit()) {
+			<button (click)="isEditing.set(!isEditing())">Make changes</button>
+		}
+		@if (canDelete()) {
+			<button (click)="deleteButtonClicked()">Delete post</button>
+		}
+	</div>
+
+	@if (isEditing()) {
+		<post-form-component [post]="post" (emitChanges)="editFormSubmitted($event)">
+			<button>Submit changes</button>
+		</post-form-component>
+	}
+
+	<p>
+		<em>Posted by {{ username() }}</em>
+	</p>
+	<p>
+		<em>on {{ post.createdAt | date: 'medium' }}</em>
+	</p>
+	@for (line of post.message.split('\n'); track $index) {
+		<p>{{ line }}</p>
+	}
+	<h3>Comments</h3>
+	@if (comments().length > 0) {
+		@for (com of comments(); track $index) {
+			<comment-component
+				[comment]="com"
+				(commentDeleted)="refreshComments()"
+			></comment-component>
+		}
+	} @else {
+		<p><em>No comments</em></p>
+	}
+	<comment-form-component
+		(emitChanges)="postComment($event)"
+		[parent_id]="post.id"
+		parent_type="post"
+	>
+		<button>Post comment</button>
+	</comment-form-component>
+</div>

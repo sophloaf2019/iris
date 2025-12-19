@@ -1,0 +1,5 @@
+<form (submit)="formSubmitted($event)">
+	<label for="Message"></label>
+	<textarea type="text" [field]="cForm.message"></textarea>
+	<ng-content></ng-content>
+</form>

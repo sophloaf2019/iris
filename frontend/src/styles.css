@@ -1,0 +1,54 @@
+@import 'tailwindcss';
+
+@theme {
+	--font-sans: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+	@apply font-bold text-2xl mb-2;
+}
+
+h2 {
+	@apply font-bold text-xl mb-1;
+}
+
+h3 {
+	@apply font-semibold text-lg mb-1;
+}
+
+p {
+	@apply mb-1;
+}
+
+a {
+	@apply underline text-sky-700 cursor-pointer;
+}
+
+button {
+	@apply px-1 bg-linear-to-b from-neutral-100 to-neutral-300
+	max-w-fit rounded-md border border-neutral-700
+	hover:from-neutral-200 hover:to-neutral-400 cursor-pointer
+	active:from-neutral-300 active:to-neutral-500
+	focus:outline-0 focus:ring-1 focus:ring-sky-500;
+}
+
+label {
+	@apply block italic mb-1;
+}
+
+input {
+	@apply block mb-2 bg-white border-neutral-500 border
+	focus:outline-0 focus:ring-1 focus:ring-sky-500;
+}
+
+textarea {
+	@apply block mb-2 bg-white border-neutral-500 border
+	focus:outline-0 focus:ring-1 focus:ring-sky-500;
+}
+
+.error-msg {
+	@apply block italic p-1
+	bg-linear-to-b from-red-300 to-red-500
+	text-white max-w-fit border border-red-500
+	rounded-md text-sm mb-2;
+}

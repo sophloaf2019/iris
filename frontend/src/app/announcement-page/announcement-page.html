@@ -1,0 +1,15 @@
+<h1>Announcements</h1>
+@if (canPost()) {
+	<post-form-component (emitChanges)="submitNewPost($event)">
+		<button>Send post</button>
+	</post-form-component>
+}
+<div class="grid space-y-4 mt-4">
+	@for (post of posts(); track $index) {
+		<post-component
+			[post]="post"
+			(postDeleted)="refresh()"
+			(postUpdated)="refresh()"
+		></post-component>
+	}
+</div>

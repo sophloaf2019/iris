@@ -1,0 +1,31 @@
+<div>
+	<p>
+		<em>{{ username() }}:</em>
+	</p>
+	@if (canEdit()) {
+		<button (click)="isEditing.set(!isEditing())">Edit</button>
+	}
+	@if (canDelete()) {
+		<button (click)="deleteButtonPressed()">Delete</button>
+	}
+	<div class="ml-4">
+		@if (isEditing()) {
+			<comment-form-component
+				[comment]="comment"
+				[parent_id]="comment.parentID"
+				[parent_type]="comment.parentType"
+				(emitChanges)="editFormSubmitted($event)"
+				><button>Save changes</button></comment-form-component
+			>
+		} @else {
+			@for (line of commentSignal().message.split('\n'); track $index) {
+				<p>{{ line }}</p>
+			}
+		}
+	</div>
+	@if (comments().length > 0) {
+		@for (comment of comments(); track $index) {
+			<comment-component [comment]="comment"></comment-component>
+		}
+	}
+</div>
